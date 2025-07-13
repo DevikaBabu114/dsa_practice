@@ -5,15 +5,17 @@ D represents to take a step down in level.
 
 You always start at sea level.
 A valley is a dip from sea level and back to sea level."""
+def count_valleys(s):
+    level=0
+    valley=0
+    for ch in s:
+        if ch == 'U':
+            level+=1
+            if level==0:
+                valley+=1
+        elif ch == 'D':
+            level-=1
+    print(valley)
 
 s=input("enter :")
-level=0
-valley=0
-for ch in s:
-    if ch == 'U':
-        level+=1
-        if level==0:
-            valley+=1
-    elif ch == 'D':
-        level-=1
-print(valley)
+count_valleys(s)
