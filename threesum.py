@@ -1,24 +1,27 @@
-""" Design an algorithm that takes as input an array A[] and 
-a number k, and determine if there are three entries 
-in the array (Not necessarily distinct) which add up to 
-the specified number k."""
-def threeSum(a,k):
-    a.sort()
+def threeSum(nums):
+    nums.sort()
+    result=[]
     index1 = 0
-    length = len(a)
+    length = len(nums)
     while index1 < length  :
-        index2 = index1
+        if index1>0 and nums[index1] == nums[index1-1] :
+            index1 += 1
+            continue
+        index2 = index1 + 1
         index3 = length - 1
-        target = k - a[index1]
-        while index2 <= index3  :
-            if a[index2] + a[index3] == target:
-                return True
-            elif a[index2] + a[index3] < target:
+        target = 0 - nums[index1]
+        while index2 < index3  :
+            if nums[index2] + nums[index3] == target:
+                result.append([nums[index1],nums[index2],nums[index3]])
+                index2 += 1
+                index3 -= 1
+                while index2<index3 and nums[index2]==nums[index2-1]:
+                    index2+=1
+            elif nums[index2] + nums[index3] < target:
                 index2 += 1
             else:
                 index3 -= 1
         index1 +=1
-    return False
+    return result
 a = list(map(int,input().split()))
-k=int(input())
-print(threeSum(a,k)) 
+print(threeSum(a)) 
